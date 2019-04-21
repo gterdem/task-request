@@ -20,6 +20,10 @@ namespace TaskRequest.Application.Roles.Commands.CreateRole
         }
         public async Task<Guid> Handle(CreateRoleCommand request, CancellationToken cancellationToken)
         {
+            if (string.IsNullOrEmpty(request.Name))
+            {
+                throw new Exception("Role Name can not be null");
+            }
             var roleEntity = new ApplicationRole(request.Name);
             var result = await _roleManager.CreateAsync(roleEntity);
 
