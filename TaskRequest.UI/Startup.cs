@@ -5,9 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MongoDbGenericRepository;
+using TaskRequest.Persistence.Config;
+//using TaskRequest.Persistence.Config;
 
 namespace TaskRequest.UI
 {
@@ -30,6 +34,10 @@ namespace TaskRequest.UI
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            var config = new ServerConfig();
+            Configuration.Bind(config);
+
+            services.AddTaskRequestMongoDb(config);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
