@@ -1,24 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using TaskRequest.Application.Roles.Commands.CreateRole;
+using TaskRequest.Application.Roles.Queries.GetAllRoles;
 using TaskRequest.Persistence.Domains;
-//using TaskRequest.Persistence.Domains;
-//using TaskRequest.Persistence.IRepository;
+using TaskRequest.Persistence.IRepository;
 using TaskRequest.UI.Models;
 
 namespace TaskRequest.UI.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         //private readonly IGenericRepository _repository;
-        //public HomeController(IGenericRepository repository)
-        //{
-        //    _repository = repository;
-        //}
         private readonly RoleManager<ApplicationRole> _roleManager;
         public HomeController(RoleManager<ApplicationRole> roleManager)
         {
@@ -26,17 +20,24 @@ namespace TaskRequest.UI.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            //var list = _repository.GetAll<ApplicationRole>(t => true);
+            var result = await Mediator.Send(new GetAllRolesQuery());
+            //var list = await _repository.GetAllAsync<ApplicationRole>(t => true);
             //await _roleManager.CreateAsync(new ApplicationRole
             //{
             //    Name = "PatatesRole"
             //});
-            return View();
+            var dojo = result;
+            return View(dojo);
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> Privacy()
         {
-            return View();
+            CreateRoleCommand cmd = new CreateRoleCommand
+            {
+                Name = "DomatesRole"
+            };
+            var result = await Mediator.Send(cmd);
+            return View(result);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

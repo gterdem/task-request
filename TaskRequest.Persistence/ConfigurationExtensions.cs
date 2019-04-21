@@ -51,6 +51,9 @@ namespace Microsoft.Extensions.DependencyInjection
 
             //var genericRepo = new GenericRepository(taskDbContext);
             //services.AddSingleton<IGenericRepository>(genericRepo);
+            var roleRepository = new RoleRepository(taskDbContext);
+            services.AddSingleton<IRoleRepository>(roleRepository);
+
 
             return services;
         }

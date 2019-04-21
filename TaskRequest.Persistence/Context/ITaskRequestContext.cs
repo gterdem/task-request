@@ -10,5 +10,7 @@ namespace TaskRequest.Persistence.Context
     public interface ITaskRequestContext
     {
         IMongoCollection<TaskEntity> Tasks { get; }
+        IMongoCollection<ApplicationUser> Users { get; }
+        IMongoCollection<ApplicationRole> Roles { get; }
     }
 }

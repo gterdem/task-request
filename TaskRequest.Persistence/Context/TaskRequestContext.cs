@@ -20,8 +20,8 @@ namespace TaskRequest.Persistence.Context
         {
 
         }
-        //public IMongoCollection<ApplicationUser> Users => Database.GetCollection<ApplicationUser>("Users");
-        //public IMongoCollection<ApplicationRole> Roles => Database.GetCollection<ApplicationRole>("Roles");
+        public IMongoCollection<ApplicationUser> Users => Database.GetCollection<ApplicationUser>("Users");
+        public IMongoCollection<ApplicationRole> Roles => Database.GetCollection<ApplicationRole>("Roles");
         public IMongoCollection<TaskEntity> Tasks => Database.GetCollection<TaskEntity>("Tasks");
     }
 }
