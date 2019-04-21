@@ -22,16 +22,8 @@ namespace TaskRequest.Application.Roles.Commands.CreateRole
         {
             var roleEntity = new ApplicationRole(request.Name);
             var result = await _roleManager.CreateAsync(roleEntity);
-            if (result.Succeeded)
-            {
-                return roleEntity.Id;
-            }
-            else
-            {
-                var dodo = result.Errors;
-            }
 
-            //await _mediator.Publish(new CustomerCreated { CustomerId = entity.CustomerId }, cancellationToken);
+            //await _mediator.Publish(new RoleCreated { RoleId = roleEntity.Id }, cancellationToken);
             return roleEntity.Id;
         }
     }
