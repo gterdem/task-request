@@ -49,8 +49,8 @@ namespace Microsoft.Extensions.DependencyInjection
             //};
             //services.ConfigureMongoDbIdentity<ApplicationUser, ApplicationRole, Guid>(mongoDbIdentityConfiguration);
 
-            //var genericRepo = new GenericRepository(taskDbContext);
-            //services.AddSingleton<IGenericRepository>(genericRepo);
+            var genericRepo = new GenericRepository(taskDbContext);
+            services.AddSingleton<IGenericRepository>(genericRepo);
             var roleRepository = new RoleRepository(taskDbContext);
             services.AddSingleton<IRoleRepository>(roleRepository);
 

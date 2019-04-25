@@ -12,21 +12,20 @@ namespace TaskRequest.UI.Controllers
 {
     public class HomeController : BaseController
     {
-        //private readonly IGenericRepository _repository;
-        private readonly RoleManager<ApplicationRole> _roleManager;
-        public HomeController(RoleManager<ApplicationRole> roleManager)
+        private readonly IGenericRepository _repository;
+        public HomeController(IGenericRepository repository)
         {
-            _roleManager = roleManager;
+            _repository = repository;
         }
         public async Task<IActionResult> Index()
         {
-            //var result = await Mediator.Send(new GetAllRolesQuery());
+            var result = await Mediator.Send(new GetAllRolesQuery());
             //var list = await _repository.GetAllAsync<ApplicationRole>(t => true);
             //await _roleManager.CreateAsync(new ApplicationRole
             //{
             //    Name = "PatatesRole"
             //});
-            //var dojo = result;
+            var dojo = result;
             return View();
         }
 

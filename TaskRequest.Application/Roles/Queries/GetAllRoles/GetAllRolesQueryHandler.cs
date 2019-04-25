@@ -14,19 +14,18 @@ namespace TaskRequest.Application.Roles.Queries.GetAllRoles
 {
     public class GetAllRolesQueryHandler : IRequestHandler<GetAllRolesQuery, List<RoleDto>>
     {
-        private readonly IRoleRepository _roleRepository;
         private readonly IMapper _mapper;
-        public GetAllRolesQueryHandler(IRoleRepository roleRepository, IMapper mapper)
+        private readonly IGenericRepository _genericRepo;
+        public GetAllRolesQueryHandler(IRoleRepository roleRepository, IMapper mapper, IGenericRepository genericRepo)
         {
-            _roleRepository = roleRepository;
             _mapper = mapper;
+            _genericRepo = genericRepo;
         }
 
         public async Task<List<RoleDto>> Handle(GetAllRolesQuery request, CancellationToken cancellationToken)
         {
-            var roleEntities = await _roleRepository.GetAllRolesAsync();
+            var roleEntities = await _genericRepo.GetAllAsync<ApplicationRole>(_ => true);
             var roles = _mapper.Map<IEnumerable<RoleDto>>(roleEntities).ToList();
-            //return new List<RoleDto>();
             return roles;
         }
     }

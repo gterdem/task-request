@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TaskRequest.Application\TaskRequest.Application.csproj" />
-    <ProjectReference Include="..\TaskRequest.Persistence\TaskRequest.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
